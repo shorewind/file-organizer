@@ -1,2 +1,2 @@
 # file-organizer
-Moves select files from downloads into subfolders
+Moves files with specified keyword or phrase into respective subfolder
