@@ -52,7 +52,7 @@ while run_flag:
         sf_flag = True
 
         while sf_flag:
-            print(f'\n----Subfolder Options----\n'
+            print(f'\n----SUBFOLDER OPTIONS----\n'
                 f'1. Add Subfolder\n'
                 f'2. Remove Subfolder\n'
                 f'3. Clear Subfolders\n'
@@ -65,7 +65,7 @@ while run_flag:
                 name = input("Enter a subfolder name: ")
 
                 if len(sf_list) > 0:
-                    subfolders = subfolders + ", " + name.upper()
+                    subfolders += ", " + name.upper()
                     lines[2] = subfolders
                 else:
                     subfolders = name.upper()
@@ -95,6 +95,7 @@ while run_flag:
 
             elif sf_selection == '3':
                 subfolders = ''
+                lines[2] = subfolders
                 print("Cleared subfolders.")
             else:
                 break   
@@ -112,8 +113,9 @@ while run_flag:
 
             for file in files:
                 for subfolder in sf_list:
-                    if subfolder.lower() in file.lower().replace(" ", ""):
-                        moved_files = f'{moved_files}\n{file}\n'
+                    short_file = file.lower().replace(" ", "").replace("-", "").replace("_", "")
+                    if subfolder.lower() in short_file:
+                        moved_files = f'{moved_files}\n{file}'
                         file_path = os.path.join(src, file)
                         dest_path = os.path.join(dest, subfolder.upper())
 
@@ -121,7 +123,7 @@ while run_flag:
                             os.makedirs(dest_path)
 
                         shutil.move(file_path, dest_path)
-            print(f'_______MOVED FILES_______'
+            print(f'\n_______MOVED FILES_______'
                 f'{moved_files}\n')
         except:
             print("Failed to move files. Please check your settings.")
